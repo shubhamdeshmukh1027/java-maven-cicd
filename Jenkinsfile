@@ -1,8 +1,18 @@
-
+```groovy
 pipeline {
     agent any
 
     stages {
+        stage('Check Java and Maven') {
+            steps {
+                echo 'Checking Java version...'
+                sh 'java -version'
+
+                echo 'Checking Maven version...'
+                sh 'mvn -version'
+            }
+        }
+
         stage('Build') {
             steps {
                 echo 'Building Java Maven project...'
@@ -27,10 +37,16 @@ pipeline {
 
     post {
         success {
-            echo 'CI/CD Pipeline completed successfully!'
+            echo 'SUCCESS: CI/CD Pipeline completed successfully!'
         }
+
         failure {
-            echo 'Pipeline failed. Please check the logs.'
+            echo 'FAILURE: Pipeline failed. Check Console Output for details.'
+        }
+
+        always {
+            echo 'Pipeline execution finished.'
         }
     }
 }
+```
