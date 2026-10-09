@@ -1,4 +1,4 @@
-```groovy
+
 pipeline {
     agent any
 
@@ -7,7 +7,6 @@ pipeline {
             steps {
                 echo 'Checking Java version...'
                 sh 'java -version'
-
                 echo 'Checking Maven version...'
                 sh 'mvn -version'
             }
@@ -39,14 +38,11 @@ pipeline {
         success {
             echo 'SUCCESS: CI/CD Pipeline completed successfully!'
         }
-
         failure {
-            echo 'FAILURE: Pipeline failed. Check Console Output for details.'
+            echo 'FAILURE: Check Console Output for details.'
         }
-
         always {
             echo 'Pipeline execution finished.'
         }
     }
 }
-```
