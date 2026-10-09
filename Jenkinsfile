@@ -7,6 +7,16 @@ pipeline {
             steps {
                 echo 'Checking Java version...'
                 sh 'java -version'
+
+                echo 'Checking Java compiler...'
+                sh 'which java'
+                sh 'which javac'
+                sh 'javac -version'
+
+                echo 'Checking JAVA_HOME...'
+                sh 'echo $JAVA_HOME'
+                sh 'readlink -f $(which javac)'
+
                 echo 'Checking Maven version...'
                 sh 'mvn -version'
             }
@@ -36,11 +46,13 @@ pipeline {
 
     post {
         success {
-            echo 'SUCCESS: CI/CD Pipeline completed successfully!'
+            echo 'SUCCESS: Build, Test, and Package completed!'
         }
+
         failure {
-            echo 'FAILURE: Check Console Output for details.'
+            echo 'FAILURE: Check the Console Output for details.'
         }
+
         always {
             echo 'Pipeline execution finished.'
         }
